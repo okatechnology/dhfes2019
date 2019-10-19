@@ -9,7 +9,8 @@ module.exports = merge({
   entry: [path.resolve(__dirname, 'src/index.tsx')],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[name].bundle.js',
+    chunkFilename: '[name].[hash].bundle.js',
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({

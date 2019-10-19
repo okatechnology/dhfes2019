@@ -2,6 +2,7 @@
   "extends": "@whatasoda/tsconfig",
   "compilerOptions": {
     "downlevelIteration": true,
+    "module": "esnext",
     "rootDir": "./",
     "typeRoots": [
       "node_modules/@types",
