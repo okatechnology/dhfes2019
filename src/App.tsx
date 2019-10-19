@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import Router from './router';
 import { BrowserRouter } from 'react-router-dom';
+import GlobalStateProvider from './globalState';
 
 const App = () => (
-  <BrowserRouter>
-    <Root>
-      <Router />
-    </Root>
-  </BrowserRouter>
+  <GlobalStateProvider>
+    <BrowserRouter>
+      <Root>
+        <Router />
+      </Root>
+    </BrowserRouter>
+  </GlobalStateProvider>
 );
 
 const Root = styled.div`
