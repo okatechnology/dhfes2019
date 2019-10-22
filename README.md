@@ -3,10 +3,10 @@
 ## Build
 ```sh
 npm i
-npm run build
+npm run build:app
 ```
 
 ## Development
 ```sh
-npm run dev # Open http://localhost:5000
+npm run dev:app # Open http://localhost:5000
 ```

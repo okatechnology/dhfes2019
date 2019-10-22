@@ -6,9 +6,9 @@
     "rootDir": "./",
     "typeRoots": [
       "node_modules/@types",
-      "src/types"
+      "src/app/types"
     ]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "scripts/**/*"],
   "exclude": ["node_modules"]
 }

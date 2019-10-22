@@ -1,6 +1,5 @@
 const webpack = require('webpack');
-const common = require('./webpack.common');
-const TerserPlugin = require('terser-webpack-plugin');
+const common = require('./config.common');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const merge = require('webpack-merge');
 
@@ -9,20 +8,6 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new TerserPlugin({
-      sourceMap: false,
-      parallel: true,
-      terserOptions: {
-        ecma: 7,
-        ie8: false,
-        output: {
-          comments: false,
-        },
-        compress: {
-          warnings: false,
-        },
       },
     }),
     new CleanWebpackPlugin(),

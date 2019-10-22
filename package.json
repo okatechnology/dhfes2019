@@ -44,7 +44,7 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "build": "webpack --mode production --config webpack.prod.js",
-    "dev": "webpack-dev-server --mode production --config webpack.dev.js"
+    "build:app": "webpack --mode production --config scripts/webpack/app/config.prod.js",
+    "dev:app": "webpack-dev-server --mode production --config scripts/webpack/app/config.dev.js"
   }
 }

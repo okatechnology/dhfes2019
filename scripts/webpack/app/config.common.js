@@ -1,14 +1,18 @@
 const path = require('path');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
 
 const styledComponentsTransformer = createStyledComponentsTransformer();
+const rootDir = path.resolve(__dirname, '../../../');
+const source = path.join(rootDir, 'src');
+const distribution = path.join(rootDir, 'dist');
 
 module.exports = merge({
-  entry: [path.resolve(__dirname, 'src/index.tsx')],
+  entry: [path.join(source, 'app/index.tsx')],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.join(distribution, 'app'),
     chunkFilename: '[name].[hash].bundle.js',
     publicPath: '/',
   },
@@ -16,6 +20,20 @@ module.exports = merge({
     new HtmlWebpackPlugin({
       minify: true,
       template: './template.html',
+    }),
+    new TerserPlugin({
+      sourceMap: false,
+      parallel: true,
+      terserOptions: {
+        ecma: 7,
+        ie8: false,
+        output: {
+          comments: false,
+        },
+        compress: {
+          warnings: false,
+        },
+      },
     }),
   ],
   resolve: {
@@ -30,7 +48,7 @@ module.exports = merge({
       },
       {
         test: /\.tsx?$/,
-        include: [path.resolve(__dirname, './src')],
+        include: [source],
         use: [
           {
             loader: 'ts-loader',
