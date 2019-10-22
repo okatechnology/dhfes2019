@@ -1,0 +1,31 @@
+name: Update redirect info
+on:
+  schedule:
+  - cron: 0 2 * * *
+
+jobs:
+  deploy-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: master
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Setup NPM
+        run: 'echo ${{secrets.NPMRC_BASE64}} | base64 -d >> ~/.npmrc'
+      - name: Install NPM Dependencies
+        run: npm ci
+      - name: Build
+        run: 'npm run build:redirect'
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v2.4.0
+        env:
+          ACTIONS_DEPLOY_KEY: '${{ secrets.PRIVATE_KEY }}'
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./public
+        with:
+          keepFiles: true
+          emptyCommits: false
