@@ -2,6 +2,15 @@ name: Update redirect info
 on:
   schedule:
   - cron: 0 2 * * *
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/redirect-info.yml
+      - src/qr-portal/generator/*
+      - package.json
+      - package-lock.json
+      - tsconfig*.json
 
 jobs:
   deploy-gh-pages:
