@@ -3,7 +3,6 @@
 
   $json = mb_convert_encoding(file_get_contents($REDIRECT_INFO_FILE_URI), 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
   $data = json_decode($json);
-  var_dump($data);
 
   http_response_code($data->status);
   header("Location: {$data->url}");
