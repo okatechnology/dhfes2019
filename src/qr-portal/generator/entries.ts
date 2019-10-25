@@ -23,6 +23,11 @@ const FORMAT = 'YYYY/MM/DD';
 
 const entries: RedirectEntry[] = [
   {
+    term: ['2019/10/25', '2019/10/26'],
+    url: 'https://dhu.life/dhfes/#toc_container',
+    status: 302,
+  },
+  {
     term: ['2019/10/26', '2019/11/28'],
     url: 'https://dhu.life/dhfes/',
     status: 302,
