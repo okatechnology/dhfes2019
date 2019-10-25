@@ -1,7 +1,11 @@
 name: Update redirect info
 on:
   schedule:
-  - cron: 0 3 * * *
+  # GitHub Actions does not have timezone setting for now,
+  # so we need to convert time from Asia/Tokyo to UTC manually.
+  # 3 - 9 = -6
+  #       = 18
+  - cron: 0 18 * * *
   push:
     branches:
       - master
