@@ -10,6 +10,7 @@ interface RedirectEntry {
   term: [string, string];
   url: string;
   /**
+   * *To prevent cache, DO NOT USE 301*
    * 301: Moved Permanently
    * 302: Found
    * 303: See Other
@@ -22,14 +23,9 @@ const FORMAT = 'YYYY/MM/DD';
 
 const entries: RedirectEntry[] = [
   {
-    term: ['2019/10/25', '2019/10/26'],
-    url: 'https://dhu.life/dhfes/#toc_container',
-    status: 301,
-  },
-  {
     term: ['2019/10/26', '2019/11/28'],
     url: 'https://dhu.life/dhfes/',
-    status: 301,
+    status: 302,
   },
 ];
 
