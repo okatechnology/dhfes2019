@@ -7,4 +7,11 @@ declare global {
 
   type PageComponent = React.FunctionComponent<PageComponentProps>;
   type LoadablePageComponent = LoadableComponent<PageComponentProps>;
+
+  interface BaseButtonProps {
+    content: JSX.Element | string;
+    external?: boolean;
+    to: string | false;
+    fontSize: string | undefined;
+  }
 }
