@@ -9,6 +9,8 @@ const rootDir = path.resolve(__dirname, '../../../');
 const source = path.join(rootDir, 'src');
 const distribution = path.join(rootDir, 'dist');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = merge({
   entry: [path.join(source, 'app/index.tsx')],
   output: {
@@ -21,21 +23,22 @@ module.exports = merge({
       minify: true,
       template: './template.html',
     }),
-    new TerserPlugin({
-      sourceMap: false,
-      parallel: true,
-      terserOptions: {
-        ecma: 7,
-        ie8: false,
-        output: {
-          comments: false,
+    isProd &&
+      new TerserPlugin({
+        sourceMap: false,
+        parallel: true,
+        terserOptions: {
+          ecma: 7,
+          ie8: false,
+          output: {
+            comments: false,
+          },
+          compress: {
+            warnings: false,
+          },
         },
-        compress: {
-          warnings: false,
-        },
-      },
-    }),
-  ],
+      }),
+  ].filter(Boolean),
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.ts', '.tsx', '.json'],
