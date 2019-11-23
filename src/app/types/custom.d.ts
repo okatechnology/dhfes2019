@@ -1,3 +1,18 @@
+declare module '*.jpg' {
+  const _path: string;
+  export default _path;
+}
+
+declare module '*.png' {
+  const _path: string;
+  export default _path;
+}
+
+declare module '*.svg' {
+  const _path: string;
+  export default _path;
+}
+
 interface GlobalState {}
 
 type NullableKey<T extends object> = {
@@ -8,4 +23,5 @@ type PartialIfOptional<T extends object> = {
   [K in keyof (Omit<T, NullableKey<T>> & { [K in NullableKey<T>]?: never })]: T[K];
 };
 
-type a = NullableKey<BaseButtonProps>;
+interface MapRect extends Pick<ClientRect, 'bottom' | 'left' | 'right' | 'top'> {}
+interface MapPoint extends Pick<MapRect, 'top' | 'left'> {}
