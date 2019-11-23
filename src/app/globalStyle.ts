@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     word-break: break-word;
+    font-size: 62.5%;
   }
   body {
     margin: 0;
