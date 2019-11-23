@@ -1,24 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
 import Router from './router';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStateProvider from './globalState';
 import { ResizeProvider } from './utils/useResize';
+import GlobalStyle from './globalStyle';
 
 const App = () => (
   <GlobalStateProvider>
     <ResizeProvider>
       <BrowserRouter>
-        <Root>
-          <Router />
-        </Root>
+        <Router />
+        <GlobalStyle />
       </BrowserRouter>
     </ResizeProvider>
   </GlobalStateProvider>
 );
-
-const Root = styled.div`
-  font-size: 20px;
-`;
 
 export default App;
