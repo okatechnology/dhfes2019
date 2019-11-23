@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useMemo, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-const BaseButton = ({ content, external, to, fontSize }: PartialIfOptional<BaseButtonProps>) => {
-  const props: StyleProps = { fontSize };
+const BaseButton = ({ className, content, external, to, fontSize }: PartialIfOptional<BaseButtonProps>) => {
+  const props: StyleProps = { fontSize, className };
+  const handler = useMemo<MouseEventHandler | undefined>(() => {
+    if (typeof to !== 'function') return undefined;
+    return (e) => (e.preventDefault(), to(e));
+  }, [to]);
+
   return (
     <>
-      {!to && <CustomAnchor {...props} href="#" onClick={preventDefault} children={content} />}
-      {!!to &&
-        (external ? (
-          <CustomAnchor {...props} href={to} children={content} />
-        ) : (
-          <CustomLink {...props} to={to} children={content} />
-        ))}
+      {typeof to === 'function' ? (
+        <CustomAnchor {...props} href="#" onClick={handler} children={content} />
+      ) : external ? (
+        <CustomAnchor {...props} href={to} children={content} />
+      ) : (
+        <CustomLink {...props} to={to} children={content} />
+      )}
     </>
   );
-};
-
-const preventDefault: React.MouseEventHandler = (e) => {
-  e.preventDefault();
 };
 
 interface StyleProps extends Omit<BaseButtonProps, 'content' | 'external' | 'to'> {}

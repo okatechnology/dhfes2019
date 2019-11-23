@@ -9,9 +9,10 @@ declare global {
   type LoadablePageComponent = LoadableComponent<PageComponentProps>;
 
   interface BaseButtonProps {
+    className?: string;
     content: JSX.Element | string;
     external?: boolean;
-    to: string | false;
+    to: string | React.MouseEventHandler;
     fontSize: string | undefined;
   }
 }
