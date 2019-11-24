@@ -12,4 +12,6 @@ const createTagMap = <T extends Record<string, string>>(input: T) => {
 
 const TagMap = createTagMap({});
 
+export type OneOfTagKey = keyof typeof TagMap;
+
 export default TagMap;
