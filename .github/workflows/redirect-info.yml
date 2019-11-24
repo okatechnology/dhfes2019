@@ -27,8 +27,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10
-      - name: Setup NPM
-        run: 'echo ${{secrets.NPMRC_BASE64}} | base64 -d >> ~/.npmrc'
       - name: Install NPM Dependencies
         run: npm ci
       - name: Build
