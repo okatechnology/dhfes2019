@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import bg from './assets/background.jpg';
 
 const GlobalStyle = createGlobalStyle`
   /* https://github.com/csstools/sanitize.css */
@@ -25,6 +26,11 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     margin: 0;
+    min-height: 100vh;
+    background-image: url(${bg});
+    background-size: cover;
+    background-position: center;
+    color: #bbb;
   }
   h1 {
     font-size: 2em;
