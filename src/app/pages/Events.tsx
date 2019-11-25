@@ -67,15 +67,7 @@ const tmp: EventItem[] = [
 export const ScrollTopContext = createContext<number>(0);
 
 const Events: PageComponent = () => {
-  const [openingCard, setOpeningCard] = useState<number | null>(null);
   const [scrollTopState, setScrollTopState] = useState<number>(0);
-  const onOpenCard = (i: number) => {
-    if (i === openingCard) {
-      setOpeningCard(null);
-    } else {
-      setOpeningCard(i);
-    }
-  };
   const listBoxEl = useRef<HTMLDivElement>(null);
   const { height } = useContext(useResize.context);
 
@@ -87,18 +79,8 @@ const Events: PageComponent = () => {
     requestAnimationFrame(update);
   }, []);
 
-  const eventList = tmp.map(({ name, description, tag, image, place }, i) => (
-    <EventListItem
-      name={name}
-      description={description}
-      tag={tag}
-      image={image}
-      place={place}
-      cardIndex={i}
-      openingCardIndex={openingCard}
-      onOpenCard={onOpenCard}
-      key={name}
-    />
+  const eventList = tmp.map(({ name, description, tag, image, place }) => (
+    <EventListItem name={name} description={description} tag={tag} image={image} place={place} key={name} />
   ));
   return (
     <>
