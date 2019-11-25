@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-text-size-adjust: 100%;
     word-break: break-word;
     font-size: 62.5%;
+    font-family: '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', 'メイリオ', sans-serif;
   }
   body {
     margin: 0;
