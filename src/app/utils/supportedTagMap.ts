@@ -16,4 +16,6 @@ const TagMap = createTagMap({
   てすと: '#134',
 });
 
+export type OneOfTagKey = keyof typeof TagMap;
+
 export default TagMap;
