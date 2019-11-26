@@ -69,7 +69,7 @@ const Card = styled.div<CardProps>`
   border-radius: 0.8rem;
   transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.52, 1.26), opacity 0.5s ease-out;
   overflow: hidden;
-  transform: ${({ visible }) => (visible ? 'translateX(-30vw)' : 'none')};
+  transform: ${({ visible }) => (visible ? 'none' : 'translateX(-30vw)')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
 `;
 
