@@ -4,21 +4,25 @@ import EventListItem from './EventListItem';
 import EventSortBar from './EventSortBar';
 import sortEvents from '../data/eventData';
 import bgImg from '../assets/background.jpg';
+import FloorMap from '../containers/FloorMap';
 
 export const ScrollTopContext = createContext<number>(0);
 
 const EventList = () => {
   const [sortKey, setSortKey] = useState<keyof EventItem>('room');
   return (
-    <Wrapper>
-      <BgLayer />
-      <EventSortBar sortKey={sortKey} setSortKey={setSortKey} />
-      {useMemo(() => {
-        return sortEvents(sortKey).map((item) => {
-          return <EventListItem {...item} key={item.name} />;
-        });
-      }, [sortKey])}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <BgLayer />
+        <EventSortBar sortKey={sortKey} setSortKey={setSortKey} />
+        {useMemo(() => {
+          return sortEvents(sortKey).map((item) => {
+            return <EventListItem {...item} key={item.name} />;
+          });
+        }, [sortKey])}
+      </Wrapper>
+      <FloorMap />
+    </>
   );
 };
 
