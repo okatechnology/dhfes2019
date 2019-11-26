@@ -1,100 +1,47 @@
-import React, { useContext, useState, useRef, createContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import EventListItem from '../components/EventListItem';
-import ramenImg from '../assets/ramen.jpg';
-import useResize from '../utils/useResize';
-
-const tmp: EventItem[] = [
-  {
-    name: 'okatechnology',
-    description:
-      'おかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよ',
-    tag: ['ramen', 'ramen', 'ramen', 'ramen', 'ramen', 'てすと'],
-    image: ramenImg,
-    place: 'e01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-  {
-    name: 'waowao',
-    description: 'wa-o',
-    tag: ['whatasoda'],
-    image: ramenImg,
-    place: 'w01',
-  },
-];
-
-export const ScrollTopContext = createContext<number>(0);
+import evSortBy from '../data/eventData';
+import bgImg from '../assets/background.jpg';
+import EventSortBar from '../components/EventSortBar';
 
 const Events: PageComponent = () => {
-  const [scrollTopState, setScrollTopState] = useState<number>(0);
-  const listBoxEl = useRef<HTMLDivElement>(null);
-  const { height } = useContext(useResize.context);
-
-  useEffect(() => {
-    const update = () => {
-      setScrollTopState(listBoxEl.current?.scrollTop ?? 0);
-      requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
-  }, []);
-
-  const eventList = tmp.map(({ name, description, tag, image, place }) => (
+  const [sortBy, setSortBy] = useState<keyof EventItem>('ruby');
+  const onSetSortBy = (evItem: keyof EventItem) => {
+    setSortBy(evItem);
+  };
+  const evSortByRuby = evSortBy('ruby').map(({ name, description, tag, image, place }) => (
+    <EventListItem name={name} description={description} tag={tag} image={image} place={place} key={name} />
+  ));
+  const evSortByPlace = evSortBy('place').map(({ name, description, tag, image, place }) => (
     <EventListItem name={name} description={description} tag={tag} image={image} place={place} key={name} />
   ));
   return (
     <>
-      <ScrollTopContext.Provider value={scrollTopState}>
-        <ListBox ref={listBoxEl} style={{ height: height }}>
-          {eventList}
-        </ListBox>
-      </ScrollTopContext.Provider>
+      <Wrapper>
+        <BgLayer></BgLayer>
+        <EventSortBar sortBy={sortBy} onSetSortBy={onSetSortBy} />
+        {sortBy === 'ruby' && evSortByRuby}
+        {sortBy === 'place' && evSortByPlace}
+      </Wrapper>
     </>
   );
 };
 
-const ListBox = styled.div`
-  overflow: scroll;
+const Wrapper = styled.div`
+  position: relative;
+`;
+
+const BgLayer = styled.div`
+  background-position: center;
+  background-size: cover;
+  background-image: url(${bgImg});
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  z-index: -9999;
 `;
 
 export default Events;

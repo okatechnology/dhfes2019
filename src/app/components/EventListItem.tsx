@@ -1,21 +1,28 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import EventTag from './EventTag';
 import EventImage from './EventImage';
 import styled from 'styled-components';
-import { ScrollTopContext } from '../pages/Events';
 
-interface EventListItemProps extends EventItem {}
+interface EventListItemProps extends Omit<EventItem, 'ruby'> {}
 
 const EventListItem = ({ name, description, tag, image, place }: EventListItemProps) => {
   const [showing, setShowing] = useState(false);
   const cardEl = useRef<HTMLElement>(null);
-  const scrollTop = useContext(ScrollTopContext);
 
   useEffect(() => {
-    if (cardEl.current && scrollTop + (window.innerHeight - 80) > cardEl.current?.offsetTop) {
-      setShowing(true);
-    }
-  }, [scrollTop]);
+    let unmounted = false;
+    const update = () => {
+      if (cardEl.current && cardEl.current?.getBoundingClientRect().top < window.innerHeight - 80) {
+        setShowing(true);
+      } else if (!unmounted) {
+        window.requestAnimationFrame(update);
+      }
+    };
+    window.requestAnimationFrame(update);
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
   const tagElement = tag.map((tagName) => <EventTag name={tagName} key={tagName} />);
   return (
@@ -37,7 +44,9 @@ const EventListItem = ({ name, description, tag, image, place }: EventListItemPr
 };
 
 const Card = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-columns: 10rem 1fr 1.5rem;
+  gap: 0.8rem;
   justify-content: space-between;
   padding: 0.8rem;
   background-color: rgba(255, 255, 255, 0.85);
@@ -53,14 +62,14 @@ const Place = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.8rem;
   width: 10rem;
   margin-top: 0.8rem;
-  height: 3.6rem;
   background-color: #ff6600;
   border-radius: 0.8rem;
-  text-decoration: none;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.4rem;
+  font-weight: bold;
 `;
 
 const Name = styled.h1`
@@ -76,13 +85,13 @@ const Description = styled.p`
   width: 100%;
   display: block;
   align-items: center;
-  margin-top: 0.8rem;
+  margin: 0.8rem 0 0;
 `;
 
 const SeeMoreButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 2rem;
 `;
 
@@ -96,7 +105,6 @@ const SeeMoreButton = styled.div`
 `;
 
 const RightItem = styled.div`
-  width: calc(100% - (10rem + 0.8rem + 0.8rem + 2rem + 0.8rem));
   display: flex;
   flex-direction: column;
 `;
