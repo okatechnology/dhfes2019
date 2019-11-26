@@ -1,37 +1,37 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import ImageBox from './ImageBox';
 import { px, vw } from '../utils/units';
 import useResize from '../utils/useResize';
-import img from '../assets/floor-map.svg';
+import floorMapImage from '../assets/floor-map.svg';
+import RoomMap from '../utils/supportedRoomMap';
 
-interface MapProps {
-  className?: string;
-  rect: MapRect;
-  point: MapPoint;
+interface FloorMapProps {
+  room: OneOfRoomKey | null;
+  close: () => void;
 }
 
-const FloorMap = ({ className, rect, point }: MapProps) => {
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  return (
-    <div ref={setContainer} className={className}>
-      {useMemo(
-        () => (
-          <CustomImageBox container={container} rect={rect} src={img} point={point} />
-        ),
-        [container, rect, point, useResize()],
-      )}
-    </div>
-  );
+const FloorMapComponent = ({ room }: FloorMapProps) => {
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+  return useMemo(() => {
+    const item = room && RoomMap[room];
+    if (!item) return null;
+    const { rect, point } = item;
+    return (
+      <div ref={setContainer}>
+        <CustomImageBox container={container} rect={rect} src={floorMapImage} point={point} />
+      </div>
+    );
+  }, [container, room, useResize()]);
 };
 
-interface CustomImageBox {
-  container: HTMLDivElement | null;
+interface CustomImageBoxProps {
+  container: HTMLElement | null;
 }
 
-const CustomImageBox = styled(ImageBox)<CustomImageBox>`
+const CustomImageBox = styled(ImageBox)<CustomImageBoxProps>`
   width: 100%;
   height: ${({ container }) => (container ? px(container.clientWidth) : vw(90))};
 `;
 
-export default FloorMap;
+export default FloorMapComponent;
