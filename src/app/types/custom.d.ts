@@ -16,10 +16,11 @@ declare global {
   interface MapPoint extends Pick<MapRect, 'top' | 'left'> {}
 
   interface EventItem {
-    name: string;
-    description: string;
-    tag: Array<keyof typeof tagMap>;
-    image: string;
-    place: keyof typeof placeMap;
+    readonly name: string;
+    readonly ruby: string;
+    readonly description: string;
+    readonly tag: Array<keyof typeof tagMap>;
+    readonly image: string;
+    readonly place: keyof typeof placeMap;
   }
 }
