@@ -13,9 +13,7 @@ const createTagMap = <T extends Record<string, string>>(input: T) => {
 const TagMap = createTagMap({
   ramen: '#FFAF33',
   whatasoda: '#DFB97F',
-  てすと: '#134',
+  ['てすと']: '#134',
 });
-
-export type OneOfTagKey = keyof typeof TagMap;
 
 export default TagMap;
