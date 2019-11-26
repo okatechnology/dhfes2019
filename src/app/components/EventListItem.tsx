@@ -1,42 +1,52 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react';
 import EventTag from './EventTag';
 import EventImage from './EventImage';
 import styled from 'styled-components';
-import { ScrollTopContext } from '../pages/Events';
+import { ScrollTopContext } from '../components/EventList';
+import { useFloorMapDispatcher } from '../containers/FloorMap';
 
 interface EventListItemProps extends EventItem {}
 
-const EventListItem = ({ name, description, tag, image, place }: EventListItemProps) => {
-  const [showing, setShowing] = useState(false);
-  const cardEl = useRef<HTMLElement>(null);
+const EventListItem = ({ name, description, tag, image, room }: EventListItemProps) => {
+  const [visible, setVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement | null>(null);
   const scrollTop = useContext(ScrollTopContext);
+  const dispatch = useFloorMapDispatcher();
 
   useEffect(() => {
-    if (cardEl.current && scrollTop + (window.innerHeight - 80) > cardEl.current?.offsetTop) {
-      setShowing(true);
+    if (!cardRef.current) return;
+    if (scrollTop + (window.innerHeight - 80) > cardRef.current.offsetTop) {
+      setVisible(true);
     }
   }, [scrollTop]);
 
-  const tagElement = tag.map((tagName) => <EventTag name={tagName} key={tagName} />);
   return (
-    <Card ref={cardEl} style={(!showing && { opacity: '0', transform: 'translateX(-30vw)' }) || undefined}>
+    <Card ref={cardRef} visible={visible}>
       <div>
         <EventImage image={image} />
-        <Place>{place}</Place>
+        <Room>{room}</Room>
       </div>
       <RightItem>
         <Name>{name}</Name>
-        <TagWrapper>{tagElement}</TagWrapper>
+        <TagWrapper>
+          {tag.map((tagName) => (
+            <EventTag name={tagName} key={tagName} />
+          ))}
+        </TagWrapper>
         <Description>{description}</Description>
       </RightItem>
       <SeeMoreButtonWrapper>
-        <SeeMoreButton></SeeMoreButton>
+        <SeeMoreButton onClick={() => dispatch({ room: room })} />
       </SeeMoreButtonWrapper>
     </Card>
   );
 };
 
-const Card = styled.section`
+interface CardProps {
+  visible: boolean;
+}
+
+const Card = styled.div<CardProps>`
   display: flex;
   justify-content: space-between;
   padding: 0.8rem;
@@ -45,11 +55,11 @@ const Card = styled.section`
   border-radius: 0.8rem;
   transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.52, 1.26), opacity 0.5s ease-out;
   overflow: hidden;
-  transform: none;
-  opacity: 1;
+  transform: ${({ visible }) => (visible ? 'translateX(-30vw)' : 'none')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
 `;
 
-const Place = styled.div`
+const Room = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,100 +1,72 @@
-import React, { useContext, useState, useRef, createContext, useEffect } from 'react';
-import styled from 'styled-components';
-import EventListItem from '../components/EventListItem';
+import React from 'react';
 import ramenImg from '../assets/ramen.jpg';
-import useResize from '../utils/useResize';
+import EventList from '../components/EventList';
+import { FloorMapProvider } from '../containers/FloorMap';
 
-const tmp: EventItem[] = [
+const eventList: EventItem[] = [
   {
     name: 'okatechnology',
     description:
       'おかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよおかてくのろじーを崇めよ',
     tag: ['ramen', 'ramen', 'ramen', 'ramen', 'ramen', 'てすと'],
     image: ramenImg,
-    place: 'e01',
+    room: 'e01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
   {
     name: 'waowao',
     description: 'wa-o',
     tag: ['whatasoda'],
     image: ramenImg,
-    place: 'w01',
+    room: 'w01',
   },
 ];
 
-export const ScrollTopContext = createContext<number>(0);
-
-const Events: PageComponent = () => {
-  const [scrollTopState, setScrollTopState] = useState<number>(0);
-  const listBoxEl = useRef<HTMLDivElement>(null);
-  const { height } = useContext(useResize.context);
-
-  useEffect(() => {
-    const update = () => {
-      setScrollTopState(listBoxEl.current?.scrollTop ?? 0);
-      requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
-  }, []);
-
-  const eventList = tmp.map(({ name, description, tag, image, place }) => (
-    <EventListItem name={name} description={description} tag={tag} image={image} place={place} key={name} />
-  ));
-  return (
-    <>
-      <ScrollTopContext.Provider value={scrollTopState}>
-        <ListBox ref={listBoxEl} style={{ height: height }}>
-          {eventList}
-        </ListBox>
-      </ScrollTopContext.Provider>
-    </>
-  );
-};
-
-const ListBox = styled.div`
-  overflow: scroll;
-`;
+const Events: PageComponent = () => (
+  <FloorMapProvider>
+    <EventList eventList={eventList} />
+  </FloorMapProvider>
+);
 
 export default Events;
