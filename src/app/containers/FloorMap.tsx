@@ -16,7 +16,7 @@ export const FloorMapProvider: FC = ({ children }) => {
   const [entry, dispatch] = useState<FloorMapEntry | null>(null);
   return (
     <useFloorMapEntry.context.Provider value={entry}>
-      <useFloorMapDispatcher.context.Provider value={dispatch}>{{ children }}</useFloorMapDispatcher.context.Provider>
+      <useFloorMapDispatcher.context.Provider value={dispatch}>{children}</useFloorMapDispatcher.context.Provider>
     </useFloorMapEntry.context.Provider>
   );
 };

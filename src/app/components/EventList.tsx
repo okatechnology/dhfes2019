@@ -1,50 +1,41 @@
-import React, { useState, useRef, createContext, useEffect } from 'react';
-import useResize from '../utils/useResize';
+import React, { useState, createContext, useMemo } from 'react';
 import styled from 'styled-components';
 import EventListItem from './EventListItem';
+import EventSortBar from './EventSortBar';
+import sortEvents from '../data/eventData';
+import bgImg from '../assets/background.jpg';
 
 export const ScrollTopContext = createContext<number>(0);
 
-interface EventListProps {
-  eventList: EventItem[];
-}
-
-const EventList = ({ eventList }: EventListProps) => {
-  const [scrollTopState, setScrollTopState] = useState<number>(0);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const { height } = useResize();
-
-  useEffect(() => {
-    let alive = true;
-    let curr = 0;
-    const update = () => {
-      if (!alive) return;
-      const next = wrapperRef.current?.scrollTop ?? 0;
-      if (curr !== next) {
-        setScrollTopState(next);
-      }
-      requestAnimationFrame(update);
-    };
-    update();
-
-    return () => {
-      alive = false;
-    };
-  }, []);
-
+const EventList = () => {
+  const [sortKey, setSortKey] = useState<keyof EventItem>('room');
   return (
-    <ScrollTopContext.Provider value={scrollTopState}>
-      <Wrapper ref={wrapperRef} style={{ height: height }}>
-        {eventList.map(({ name, description, tag, image, room }) => (
-          <EventListItem name={name} description={description} tag={tag} image={image} room={room} key={name} />
-        ))}
-      </Wrapper>
-    </ScrollTopContext.Provider>
+    <Wrapper>
+      <BgLayer />
+      <EventSortBar sortKey={sortKey} setSortKey={setSortKey} />
+      {useMemo(() => {
+        return sortEvents(sortKey).map((item) => {
+          return <EventListItem {...item} key={item.name} />;
+        });
+      }, [sortKey])}
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  overflow: scroll;
+  position: relative;
+`;
+
+const BgLayer = styled.div`
+  background-position: center;
+  background-size: cover;
+  background-image: url(${bgImg});
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  z-index: -100;
 `;
 
 export default EventList;
