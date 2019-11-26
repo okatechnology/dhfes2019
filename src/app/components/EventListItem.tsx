@@ -47,8 +47,8 @@ const EventListItem = ({ name, description, tag, image, room }: EventListItemPro
         </TagWrapper>
         <Description>{description}</Description>
       </RightItem>
-      <SeeMoreButtonWrapper>
-        <SeeMoreButton onClick={() => dispatch({ room })} />
+      <SeeMoreButtonWrapper onClick={() => dispatch({ room })}>
+        <SeeMoreButton />
       </SeeMoreButtonWrapper>
     </Card>
   );
