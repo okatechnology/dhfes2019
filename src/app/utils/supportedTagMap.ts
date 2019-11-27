@@ -11,11 +11,11 @@ const createTagMap = <T extends Record<string, [string, string]>>(input: T) => {
 };
 
 const TagMap = createTagMap({
-  ramen: ['', '#FFAF33'],
-  whatasoda: ['', '#DFB97F'],
-  test: ['', '#134'],
-  okatechnology: ['okatechnology', '#804d00'],
-  waowao: ['waowao', '#120580'],
+  ramen: ['らーめん', '#a2A'],
+  whatasoda: ['神', '#a0B'],
+  test: ['テスト', '#134'],
+  okatechnology: ['たいやき', '#800'],
+  waowao: ['waowao', '#150'],
 });
 
 export const AllTagKeyList = Object.keys(TagMap) as OneOfTagKey[];
