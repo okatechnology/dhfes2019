@@ -1,6 +1,6 @@
 import ramenImg from '../assets/ramen.jpg';
 
-const eventDataArr: readonly EventItem[] = [
+const EventDataList: readonly EventItem[] = [
   {
     name: 'MontBlanc',
     // ruby: 'montblanc',
@@ -32,7 +32,7 @@ const eventDataArr: readonly EventItem[] = [
     // ruby: 'smaf',
     description:
       'SmaFは軽食のお店！ ふわふわ綿菓子と、カリカリポップコーンと、カリカリポテトもあるよ~ 『お客さんがSmaFのフードを食べたあと、もっと楽しいように。^^』',
-    tag: ['whatasoda', 'てすと'],
+    tag: ['whatasoda', 'test'],
     image: ramenImg,
     room: 'cafeteria',
   },
@@ -254,12 +254,4 @@ const eventDataArr: readonly EventItem[] = [
   },
 ];
 
-const sortEvents = (key: keyof EventItem) => {
-  return [...eventDataArr].sort(({ [key]: a }, { [key]: b }) => {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-  });
-};
-
-export default sortEvents;
+export default EventDataList;
