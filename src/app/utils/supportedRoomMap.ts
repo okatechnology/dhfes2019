@@ -5,12 +5,7 @@ export interface RoomItem {
   point: MapPoint;
 }
 
-const createRoomMap = <T extends Record<string, RoomItem>>(input: T) => {
-  return Object.entries(input).reduce<Record<string, RoomItem>>((acc, [name, value]) => {
-    acc[name] = value;
-    return acc;
-  }, {}) as Record<keyof T, RoomItem>;
-};
+const createRoomMap = <T extends string>(input: Record<T, RoomItem>) => input;
 
 const RoomMap = createRoomMap({
   E01: { name: 'E01', rect: { bottom: 0, left: 0, right: 0, top: 0 }, point: { left: 0, top: 0 } },
