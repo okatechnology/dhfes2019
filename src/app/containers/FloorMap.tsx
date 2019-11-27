@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, Dispatch, FC, useMemo } from 'react';
+import React, { createContext, useContext, useState, Dispatch, FC } from 'react';
 import FloorMapComponent from '../components/FloorMap';
 
 interface FloorMapEntry {
@@ -20,15 +20,6 @@ export const FloorMapProvider: FC = ({ children }) => {
   );
 };
 
-const FloorMap = () => {
-  const dispatch = useFloorMapDispatcher();
-  const entry = useFloorMapEntry();
-  const { close } = useMemo(() => {
-    const close = () => dispatch(null);
-    return { close };
-  }, []);
-
-  return <FloorMapComponent room={entry?.room ?? null} close={close} />;
-};
+const FloorMap = () => <FloorMapComponent room={useFloorMapEntry()?.room ?? null} />;
 
 export default FloorMap;

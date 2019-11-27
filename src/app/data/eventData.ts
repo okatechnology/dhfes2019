@@ -1,6 +1,6 @@
 import ramenImg from '../assets/ramen.jpg';
 
-const EventDataList: readonly EventItem[] = [
+const EventDataList: EventItem[] = [
   {
     name: 'MontBlanc',
     // ruby: 'montblanc',
@@ -253,5 +253,14 @@ const EventDataList: readonly EventItem[] = [
     room: 'W01',
   },
 ];
+
+const sortEvents = (key: keyof EventItem) => {
+  EventDataList.sort(({ [key]: a }, { [key]: b }) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+};
+sortEvents('room');
 
 export default EventDataList;

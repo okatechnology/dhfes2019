@@ -46,9 +46,9 @@ const EventListItem = ({ name, description, tag, image, room }: EventListItemPro
         </TagWrapper>
         <Description>{description}</Description>
       </RightItem>
-      <SeeMoreButtonWrapper onClick={() => dispatch({ room })}>
-        <SeeMoreButton />
-      </SeeMoreButtonWrapper>
+      <ShowDetailButtonWrapper onClick={() => dispatch({ room })}>
+        <ShowDetailButton />
+      </ShowDetailButtonWrapper>
     </Card>
   );
 };
@@ -102,14 +102,17 @@ const Description = styled.p`
   margin: 0.8rem 0 0;
 `;
 
-const SeeMoreButtonWrapper = styled.div`
+const ShowDetailButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 2rem;
+  padding-left: 5px;
+  margin-left: -6px;
+  border-left: #3338 1px solid;
 `;
 
-const SeeMoreButton = styled.div`
+const ShowDetailButton = styled.div`
   width: 1.2rem;
   height: 1.2rem;
   border-right: 3px solid #333;

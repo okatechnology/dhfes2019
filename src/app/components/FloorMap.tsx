@@ -5,15 +5,13 @@ import { px, vw } from '../utils/units';
 import useResize from '../utils/useResize';
 import floorMapImage from '../assets/floor-map.svg';
 import RoomMap from '../utils/supportedRoomMap';
-import BaseButton from './BaseButton';
 import Modal from './Modal';
 
 interface FloorMapProps {
   room: OneOfRoomKey | null;
-  close: () => void;
 }
 
-const FloorMapComponent = ({ room, close }: FloorMapProps) => {
+const FloorMapComponent = ({ room }: FloorMapProps) => {
   const [container, setContainer] = useState<HTMLElement | null>(null);
   return (
     <CustomModal visible={!!room}>
@@ -24,7 +22,6 @@ const FloorMapComponent = ({ room, close }: FloorMapProps) => {
         return (
           <Wrapper ref={setContainer}>
             <CustomImageBox container={container} rect={rect} src={floorMapImage} point={point} />
-            <CustomButton to={close}>CLOSE</CustomButton>
           </Wrapper>
         );
       }, [container, room, useResize()])}
@@ -49,8 +46,6 @@ const CustomImageBox = styled(ImageBox)<CustomImageBoxProps>`
   border-radius: 10px;
   overflow: hidden;
 `;
-
-const CustomButton = styled(BaseButton)``;
 
 const CustomModal = styled(Modal)`
   top: 20px;
