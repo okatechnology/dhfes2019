@@ -23,11 +23,8 @@ const EventList = () => {
         />
         {useMemo(() => {
           return sortEvents(sortKey).map((item) => {
-            return (
-              item.tag.some((value) => filterKeyArr.includes(value)) && (
-                <EventListItem {...item} key={item.name} sortKey={sortKey} filterKeyArr={filterKeyArr} />
-              )
-            );
+            if (!item.tag.some((value) => filterKeyArr.includes(value))) return null;
+            return <EventListItem {...item} key={`${item.name}-${sortKey}-${filterKeyArr.length}`} />;
           });
         }, [sortKey, filterKeyArr])}
       </Wrapper>

@@ -1,44 +1,35 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import EventTag from './EventTag';
 import EventImage from './EventImage';
 import styled from 'styled-components';
 import { useFloorMapDispatcher } from '../containers/FloorMap';
 import useResize from '../utils/useResize';
 import supportedRoomMap from '../utils/supportedRoomMap';
+import useScrollEffect from '../utils/useScrollEffect';
 
-interface EventListItemProps extends Omit<EventItem, 'ruby'> {
-  sortKey: keyof EventItem;
-  filterKeyArr: OneOfTagKey[];
-}
+interface EventListItemProps extends EventItem {}
 
-const EventListItem = ({ name, description, tag, image, room, sortKey, filterKeyArr }: EventListItemProps) => {
+const EventListItem = ({ name, description, tag, image, room }: EventListItemProps) => {
   const [visible, setVisible] = useState(false);
+  const [threshold, setThreshold] = useState(Infinity);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useFloorMapDispatcher();
 
+  const resize = useResize();
   useEffect(() => {
-    let alive = true;
+    if (visible) return;
     const initialTop = cardRef.current?.getBoundingClientRect().top ?? Infinity;
     const initialScroll = window.scrollY;
     const threshold = initialTop + initialScroll - window.innerHeight + 80;
+    setThreshold(threshold);
+  }, [visible || resize]);
 
-    const update = () => {
-      if (!alive) return;
-      if (threshold < window.scrollY) {
-        setVisible(true);
-        return;
-      }
-      requestAnimationFrame(update);
-    };
-    update();
-    return () => {
-      alive = false;
-    };
-  }, [useResize(), sortKey, filterKeyArr]);
-
-  useMemo(() => {
-    setVisible(false);
-  }, [sortKey, filterKeyArr]);
+  useScrollEffect(
+    ({ scrollY }) => {
+      if (threshold < scrollY) setVisible(true);
+    },
+    [!visible, threshold],
+  );
 
   return (
     <Card ref={cardRef} visible={visible}>
