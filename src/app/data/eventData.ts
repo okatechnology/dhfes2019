@@ -6,7 +6,7 @@ const eventDataArr: readonly EventItem[] = [
     // ruby: 'montblanc',
     description:
       '３DCGサークルのMontBlancです！学祭では作品のパネル展示、デモリールや動画作品の上映、モデルやアニメーションを３Dで色んな角度から見られるものを設置などを予定しております。 是非、お越しください！',
-    tag: [],
+    tag: ['ramen', 'whatasoda'],
     image: ramenImg,
     room: 'E01',
   },
@@ -15,7 +15,7 @@ const eventDataArr: readonly EventItem[] = [
     // ruby: 'aniway',
     description:
       '有志のアニメーション制作のサークルです！立ち上げたばかりなので、今回は学祭初出展となります！よろしくお願いします！',
-    tag: [],
+    tag: ['whatasoda'],
     image: ramenImg,
     room: 'W03',
   },
@@ -23,7 +23,7 @@ const eventDataArr: readonly EventItem[] = [
     name: 'タピオカカフェ',
     // ruby: 'たぴおかかふぇ',
     description: 'タピオカたっぷりのタピオカミルクティーを販売しています！ 是非お越しください！！',
-    tag: [],
+    tag: ['ramen'],
     image: ramenImg,
     room: 'cafeteria',
   },
@@ -32,7 +32,7 @@ const eventDataArr: readonly EventItem[] = [
     // ruby: 'smaf',
     description:
       'SmaFは軽食のお店！ ふわふわ綿菓子と、カリカリポップコーンと、カリカリポテトもあるよ~ 『お客さんがSmaFのフードを食べたあと、もっと楽しいように。^^』',
-    tag: [],
+    tag: ['whatasoda', 'てすと'],
     image: ramenImg,
     room: 'cafeteria',
   },
@@ -41,7 +41,7 @@ const eventDataArr: readonly EventItem[] = [
     // ruby: 'whitecoffee',
     description:
       '「好きなコーヒーは、わかる。好きなコーヒー豆は、わからない。」そんなあなたに試して欲しい、コーヒー豆の「好み診断」、始めました。',
-    tag: [],
+    tag: ['ramen'],
     image: ramenImg,
     room: 'cafeteria',
   },
