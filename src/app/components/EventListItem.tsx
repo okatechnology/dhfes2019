@@ -40,8 +40,8 @@ const EventListItem = ({ name, description, tag, image, room }: EventListItemPro
       <RightItem>
         <Name>{name}</Name>
         <TagWrapper>
-          {tag.map((tagName) => (
-            <EventTag name={tagName} key={tagName} />
+          {tag.map((tagKey) => (
+            <EventTag tagKey={tagKey} key={tagKey} />
           ))}
         </TagWrapper>
         <Description>{description}</Description>

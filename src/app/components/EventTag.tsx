@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import tagMap from '../utils/supportedTagMap';
+import TagMap from '../utils/supportedTagMap';
 
 interface TagProps {
-  name: keyof typeof tagMap;
+  tagKey: OneOfTagKey;
 }
 
-const EventTag = ({ name }: TagProps) => {
-  return <Tag color={tagMap[name].color}>{name}</Tag>;
+const EventTag = ({ tagKey }: TagProps) => {
+  const { color, name } = TagMap[tagKey];
+  return <Tag color={color}>{name}</Tag>;
 };
 
 interface StyleProps {

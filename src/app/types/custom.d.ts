@@ -1,4 +1,7 @@
-interface GlobalState {}
+interface GlobalState {
+  setShownTagMap: React.Dispatch<React.SetStateAction<ShownTagMap>>;
+  shownTagMap: ShownTagMap;
+}
 
 type NullableKey<T extends object> = {
   [K in keyof T]-?: (null extends T[K] ? K : never) | (undefined extends T[K] ? K : never);
@@ -21,3 +24,5 @@ interface EventItem {
   tag: OneOfTagKey[];
   room: OneOfRoomKey;
 }
+
+interface ShownTagMap extends Record<OneOfTagKey, boolean> {}

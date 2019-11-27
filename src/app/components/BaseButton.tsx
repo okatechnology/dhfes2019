@@ -2,7 +2,7 @@ import React, { useMemo, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-const BaseButton = ({ className, content, external, to, fontSize }: PartialIfOptional<BaseButtonProps>) => {
+const BaseButton = ({ className, children, external, to, fontSize }: PartialIfOptional<BaseButtonProps>) => {
   const props: StyleProps = { fontSize, className };
   const handler = useMemo<MouseEventHandler | undefined>(() => {
     if (typeof to !== 'function') return undefined;
@@ -12,17 +12,17 @@ const BaseButton = ({ className, content, external, to, fontSize }: PartialIfOpt
   return (
     <>
       {typeof to === 'function' ? (
-        <CustomAnchor {...props} href="#" onClick={handler} children={content} />
+        <CustomAnchor {...props} href="#" onClick={handler} children={children} />
       ) : external ? (
-        <CustomAnchor {...props} href={to} children={content} />
+        <CustomAnchor {...props} href={to} children={children} />
       ) : (
-        <CustomLink {...props} to={to} children={content} />
+        <CustomLink {...props} to={to} children={children} />
       )}
     </>
   );
 };
 
-interface StyleProps extends Omit<BaseButtonProps, 'content' | 'external' | 'to'> {}
+interface StyleProps extends Omit<BaseButtonProps, 'children' | 'external' | 'to'> {}
 
 const styleCreator = css<StyleProps>`
   background-color: #777;

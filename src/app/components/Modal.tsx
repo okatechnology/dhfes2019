@@ -4,18 +4,19 @@ import styled, { keyframes } from 'styled-components';
 interface ModalProps {
   visible: boolean;
   children: ReactNode;
+  className?: string;
 }
 
-const Modal = ({ children, visible }: ModalProps) => {
+const Modal = ({ children, visible, className }: ModalProps) => {
   const [display, setDisplay] = useState(visible);
   const handleAnimationEnd: AnimationEventHandler = (e) => {
     setDisplay(e.animationName === fadeIn.getName());
   };
   const defer = useMemo(() => children, [visible || display]);
   return (
-    <Container onAnimationEnd={handleAnimationEnd} display={display} visible={visible}>
+    <Wrapper onAnimationEnd={handleAnimationEnd} cssDisplay={display} visible={visible} className={className}>
       {visible && display ? children : defer}
-    </Container>
+    </Wrapper>
   );
 };
 
@@ -37,13 +38,13 @@ const fadeOut = keyframes`
   }
 `;
 
-const Container = styled.div<ModalProps & { display: boolean }>`
+interface WrapperProps extends ModalProps {
+  cssDisplay: boolean;
+}
+
+const Wrapper = styled.div<WrapperProps>`
   position: fixed;
-  top: 30px;
-  left: 20px;
-  right: 20px;
-  bottom: 30px;
-  display: ${({ visible, display }) => (visible || display ? 'block' : 'none')};
+  display: ${({ visible, cssDisplay: display }) => (visible || display ? 'block' : 'none')};
   animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.3s ease-in 0s 1;
   z-index: 100;
 `;

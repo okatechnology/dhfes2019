@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, Dispatch, FC, useMemo } from 'react';
-import Modal from '../components/Modal';
 import FloorMapComponent from '../components/FloorMap';
 
 interface FloorMapEntry {
@@ -29,11 +28,7 @@ const FloorMap = () => {
     return { close };
   }, []);
 
-  return (
-    <Modal visible={!!entry}>
-      <FloorMapComponent room={entry?.room ?? null} close={close} />
-    </Modal>
-  );
+  return <FloorMapComponent room={entry?.room ?? null} close={close} />;
 };
 
 export default FloorMap;

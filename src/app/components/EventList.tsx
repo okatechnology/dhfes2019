@@ -1,32 +1,34 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import EventListItem from './EventListItem';
 import EventBottomBar from './EventBottomBar';
-import sortEvents from '../data/eventData';
+import EventDataList from '../data/eventData';
 import bgImg from '../assets/background.jpg';
 import FloorMap from '../containers/FloorMap';
-import TagMap from '../utils/supportedTagMap';
+import useGlobalState from '../globalState';
 
-export const allTagNames = Object.keys(TagMap) as OneOfTagKey[];
 const EventList = () => {
-  const [sortKey, setSortKey] = useState<keyof EventItem>('room');
-  const [filterKeyArr, setFilterKeyArr] = useState<OneOfTagKey[]>(allTagNames);
+  const { shownTagMap } = useGlobalState();
+  const shownTagStr = useMemo(() => {
+    return Object.entries(shownTagMap).reduce<string>((acc, [key, value]) => {
+      if (value) acc += `_${key}`;
+      return acc;
+    }, '');
+  }, [shownTagMap]);
+
   return (
     <>
       <Wrapper>
         <BgLayer />
-        <EventBottomBar
-          sortKey={sortKey}
-          setSortKey={setSortKey}
-          filterKeyArr={filterKeyArr}
-          setFilterKeyArr={setFilterKeyArr}
-        />
-        {useMemo(() => {
-          return sortEvents(sortKey).map((item) => {
-            if (!item.tag.some((value) => filterKeyArr.includes(value))) return null;
-            return <EventListItem {...item} key={`${item.name}-${sortKey}-${filterKeyArr.length}`} />;
-          });
-        }, [sortKey, filterKeyArr])}
+        <EventBottomBar />
+        <div>
+          {useMemo(() => {
+            return EventDataList.map((item) => {
+              if (shownTagStr && !item.tag.some((key) => shownTagMap[key])) return null;
+              return <EventListItem {...item} key={`${item.name}-${shownTagStr}`} />;
+            });
+          }, [shownTagMap])}
+        </div>
       </Wrapper>
       <FloorMap />
     </>
@@ -34,7 +36,6 @@ const EventList = () => {
 };
 
 const Wrapper = styled.div`
-  position: relative;
   padding: 0.8rem 0 5rem;
 `;
 

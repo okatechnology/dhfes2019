@@ -10,7 +10,7 @@ declare global {
 
   interface BaseButtonProps {
     className?: string;
-    content: JSX.Element | string;
+    children: JSX.Element | string;
     external?: boolean;
     to: string | React.MouseEventHandler;
     fontSize: string | undefined;
