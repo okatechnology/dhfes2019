@@ -1,25 +1,35 @@
-import React, { useState, createContext, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import EventListItem from './EventListItem';
-import EventSortBar from './EventSortBar';
+import EventBottomBar from './EventBottomBar';
 import sortEvents from '../data/eventData';
 import bgImg from '../assets/background.jpg';
 import FloorMap from '../containers/FloorMap';
+import TagMap from '../utils/supportedTagMap';
 
-export const ScrollTopContext = createContext<number>(0);
-
+export const allTagNames = Object.keys(TagMap) as OneOfTagKey[];
 const EventList = () => {
   const [sortKey, setSortKey] = useState<keyof EventItem>('room');
+  const [filterKeyArr, setFilterKeyArr] = useState<OneOfTagKey[]>(allTagNames);
   return (
     <>
       <Wrapper>
         <BgLayer />
-        <EventSortBar sortKey={sortKey} setSortKey={setSortKey} />
+        <EventBottomBar
+          sortKey={sortKey}
+          setSortKey={setSortKey}
+          filterKeyArr={filterKeyArr}
+          setFilterKeyArr={setFilterKeyArr}
+        />
         {useMemo(() => {
           return sortEvents(sortKey).map((item) => {
-            return <EventListItem {...item} key={item.name} />;
+            return (
+              item.tag.some((value) => filterKeyArr.includes(value)) && (
+                <EventListItem {...item} key={item.name} sortKey={sortKey} filterKeyArr={filterKeyArr} />
+              )
+            );
           });
-        }, [sortKey])}
+        }, [sortKey, filterKeyArr])}
       </Wrapper>
       <FloorMap />
     </>
@@ -28,6 +38,7 @@ const EventList = () => {
 
 const Wrapper = styled.div`
   position: relative;
+  padding: 0.8rem 0 5rem;
 `;
 
 const BgLayer = styled.div`

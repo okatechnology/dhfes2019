@@ -1,13 +1,17 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import EventTag from './EventTag';
 import EventImage from './EventImage';
 import styled from 'styled-components';
 import { useFloorMapDispatcher } from '../containers/FloorMap';
 import useResize from '../utils/useResize';
+import supportedRoomMap from '../utils/supportedRoomMap';
 
-interface EventListItemProps extends Omit<EventItem, 'ruby'> {}
+interface EventListItemProps extends Omit<EventItem, 'ruby'> {
+  sortKey: keyof EventItem;
+  filterKeyArr: OneOfTagKey[];
+}
 
-const EventListItem = ({ name, description, tag, image, room }: EventListItemProps) => {
+const EventListItem = ({ name, description, tag, image, room, sortKey, filterKeyArr }: EventListItemProps) => {
   const [visible, setVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useFloorMapDispatcher();
@@ -30,13 +34,17 @@ const EventListItem = ({ name, description, tag, image, room }: EventListItemPro
     return () => {
       alive = false;
     };
-  }, [useResize()]);
+  }, [useResize(), sortKey, filterKeyArr]);
+
+  useMemo(() => {
+    setVisible(false);
+  }, [sortKey, filterKeyArr]);
 
   return (
     <Card ref={cardRef} visible={visible}>
       <div>
         <EventImage image={image} />
-        <Room>{room}</Room>
+        <Room>{supportedRoomMap[room].name}</Room>
       </div>
       <RightItem>
         <Name>{name}</Name>
@@ -65,7 +73,7 @@ const Card = styled.div<CardProps>`
   justify-content: space-between;
   padding: 0.8rem;
   background-color: rgba(255, 255, 255, 0.85);
-  margin: 0.8rem;
+  margin: 0 0.8rem 0.8rem;
   border-radius: 0.8rem;
   transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.52, 1.26), opacity 0.5s ease-out;
   overflow: hidden;

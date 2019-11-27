@@ -14,6 +14,8 @@ const TagMap = createTagMap({
   ramen: '#FFAF33',
   whatasoda: '#DFB97F',
   ['てすと']: '#134',
+  okatechnology: '#804d00',
+  waowao: '#120580',
 });
 
 export default TagMap;
