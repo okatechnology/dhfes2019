@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import EventListItem from './EventListItem';
-import EventBottomBar from './EventBottomBar';
 import EventDataList from '../data/eventData';
 import bgImg from '../assets/background.jpg';
 import FloorMap from '../containers/FloorMap';
@@ -20,7 +19,6 @@ const EventList = () => {
     <>
       <Wrapper>
         <BgLayer />
-        <EventBottomBar />
         <div>
           {useMemo(() => {
             return EventDataList.map((item) => {
