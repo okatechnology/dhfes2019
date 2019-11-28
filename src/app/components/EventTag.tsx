@@ -14,18 +14,16 @@ const EventTag = ({ tagKey }: TagProps) => {
 interface StyleProps {
   color: string;
 }
-const Tag = styled.p<StyleProps>`
+const Tag = styled.span<StyleProps>`
   background-color: ${(props) => props.color};
   color: #fff;
   font-size: 1.4rem;
   border-radius: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: max-content;
+  text-align: center;
   line-height: 1;
-  padding: 0.4rem;
+  padding: 0.4rem 0.4rem 0.4rem 0.5rem;
   margin: 0.2rem;
+  font-weight: bold;
 `;
 
 export default EventTag;

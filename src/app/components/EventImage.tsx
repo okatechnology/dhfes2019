@@ -11,8 +11,8 @@ const EventImage = ({ image }: EventImageProps) => {
 
 interface StyleProps extends Omit<EventImageProps, 'image'> {}
 const CustomImg = styled.img<StyleProps>`
-  width: 10rem;
-  height: 10rem;
+  width: 11rem;
+  height: 11rem;
   border-radius: 0.8rem;
 `;
 

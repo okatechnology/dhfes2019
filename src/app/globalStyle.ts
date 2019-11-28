@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
     word-break: break-word;
     font-size: 62.5%;
     font-family: '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', 'メイリオ', sans-serif;
+    letter-spacing: 0.1em;
   }
   body {
     margin: 0;
@@ -31,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
     background-image: url(${bg});
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     color: #bbb;
   }
   h1 {

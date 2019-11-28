@@ -4,11 +4,7 @@ import styled from 'styled-components';
 import Modal from './Modal';
 import BaseButton from './BaseButton';
 import { vw } from '../utils/units';
-
-const IconMap = {
-  search: '🔎',
-  done: '✔',
-};
+import Colors from '../utils/colors';
 
 interface FixedButtonProps extends Pick<BaseButtonProps, 'to'> {
   type: keyof typeof IconMap;
@@ -28,14 +24,32 @@ const Button = styled(BaseButton)`
   text-align: center;
   line-height: ${vw(size)};
   text-decoration: none;
-  background-color: #ff6600;
-  color: #1e1;
+  background-color: ${Colors.TheMagenta};
+  color: #ddd;
   border-radius: 50%;
-  font-size: ${vw(size / 2)};
+  font-size: ${vw(size / 1.5)};
+  transform-origin: center;
 `;
 const CustomModal = styled(Modal)`
   bottom: 20px;
   right: 20px;
 `;
+
+const Search = styled.span`
+  display: block;
+  transform: rotateZ(45deg) translateY(-6%);
+  font-weight: 900;
+`;
+
+const Done = styled.span`
+  display: block;
+  transform: scale(0.8);
+  font-weight: 900;
+`;
+
+const IconMap = {
+  search: <Search children={'⚲'} />,
+  done: <Done children={'✕'} />,
+};
 
 export default FixedButton;
