@@ -1,5 +1,5 @@
 const TheCyan = '#39f';
-const TheMagenta = '#f4e';
+const TheMagenta = '#f47';
 
 const Colors = { TheCyan, TheMagenta };
 
