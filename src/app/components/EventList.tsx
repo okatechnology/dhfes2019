@@ -5,6 +5,7 @@ import EventDataList from '../data/eventData';
 import FloorMap from '../containers/FloorMap';
 import useGlobalState from '../globalState';
 import logo from '../assets/dhfes-logo.png';
+import PromptScroll from './PromptScroll';
 
 const EventList = () => {
   const { shownTagMap } = useGlobalState();
@@ -19,6 +20,7 @@ const EventList = () => {
     <>
       <FirstView>
         <CustomImage src={logo} />
+        <PromptScroll />
       </FirstView>
       <Wrapper>
         {useMemo(() => {
