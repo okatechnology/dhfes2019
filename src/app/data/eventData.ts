@@ -1,7 +1,7 @@
 import whiteCoffee from '../assets/eventLogo/whiteCoffee.png';
 import ted from '../assets/eventLogo/ted.jpg';
 import whiteChristmas from '../assets/eventLogo/whiteChristmas.jpg';
-import itsukaKitto from '../assets/eventLogo/itsukaKitto.png';
+import itsukakitto from '../assets/eventLogo/itsukakitto.png';
 import kakuge from '../assets/eventLogo/kakuge.jpg';
 import kanojotono from '../assets/eventLogo/kanojotono.jpg';
 import leftHand from '../assets/eventLogo/leftHand.png';
@@ -96,7 +96,7 @@ const EventDataList: EventItem[] = [
     description:
       'まだまだ社会的に認知や理解されていないLGBTQについて音楽と映像といったソフトパワーを使って他にも悩んでいる人を励ませ、共感できたらと活動しています。 当日はMVを上映します。公演時間 : 11/30(土) 13:50～14:10',
     tag: ['music', 'event', 'hall', 'day1'],
-    image: itsukaKitto,
+    image: itsukakitto,
     room: 'hall',
   },
   {
