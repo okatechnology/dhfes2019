@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Modal from './Modal';
 import BaseButton from './BaseButton';
 import { vw } from '../utils/units';
 import Colors from '../utils/colors';
+import useScrollEffect from '../utils/useScrollEffect';
 
 interface FixedButtonProps extends Pick<BaseButtonProps, 'to'> {
   type: keyof typeof IconMap;
 }
 
-const FixedButton = ({ to, type }: FixedButtonProps) => (
-  <CustomModal visible={true}>
-    <Button to={to} children={IconMap[type]} />
-  </CustomModal>
-);
+const FixedButton = ({ to, type }: FixedButtonProps) => {
+  const [visible, setVisible] = useState(false);
+  useScrollEffect(
+    ({ scrollY }) => {
+      if (scrollY > 0) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    },
+    [true],
+  );
+  return (
+    <CustomModal visible={visible}>
+      <Button to={to} children={IconMap[type]} />
+    </CustomModal>
+  );
+};
 
 const size = 15;
 const Button = styled(BaseButton)`
