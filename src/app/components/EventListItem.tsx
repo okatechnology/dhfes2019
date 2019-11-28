@@ -6,6 +6,7 @@ import { useFloorMapDispatcher } from '../containers/FloorMap';
 import useResize from '../utils/useResize';
 import supportedRoomMap from '../utils/supportedRoomMap';
 import useScrollEffect from '../utils/useScrollEffect';
+import Colors from '../utils/colors';
 
 interface EventListItemProps extends EventItem {}
 
@@ -59,12 +60,11 @@ interface CardProps {
 
 const Card = styled.div<CardProps>`
   display: grid;
-  grid-template-columns: 10rem 1fr 1.5rem;
-  gap: 0.8rem;
+  grid-template-columns: 11rem 1rem 1fr 0.6rem 2.2rem;
+  padding: 1rem;
+  margin: 0 0 0.8rem;
   justify-content: space-between;
-  padding: 0.8rem;
   background-color: rgba(255, 255, 255, 0.85);
-  margin: 0 0.8rem 0.8rem;
   border-radius: 0.8rem;
   transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.52, 1.26), opacity 0.5s ease-out;
   overflow: hidden;
@@ -77,20 +77,21 @@ const Room = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0.8rem;
-  width: 10rem;
+  width: 11rem;
   margin-top: 0.8rem;
-  background-color: #ff6600;
-  border-radius: 0.8rem;
+  background-color: ${Colors.TheCyan};
+  border-radius: 1rem;
   color: #fff;
   font-size: 1.4rem;
   font-weight: bold;
+  white-space: pre-wrap;
 `;
 
 const Name = styled.h1`
   font-size: 2.4rem;
   color: #333;
-  margin: 0.8rem 0 0;
-  line-height: 1;
+  margin: 0.4rem 0 0;
+  line-height: 1.2;
 `;
 
 const Description = styled.p`
@@ -100,6 +101,7 @@ const Description = styled.p`
   display: block;
   align-items: center;
   margin: 0.8rem 0 0;
+  font-weight: bold;
 `;
 
 const ShowDetailButtonWrapper = styled.div`
@@ -107,9 +109,10 @@ const ShowDetailButtonWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 2rem;
-  padding-left: 5px;
-  margin-left: -6px;
+  padding-left: 6px;
+  margin-left: -3px;
   border-left: #3338 1px solid;
+  grid-column: 5 / 6;
 `;
 
 const ShowDetailButton = styled.div`
@@ -122,14 +125,13 @@ const ShowDetailButton = styled.div`
 `;
 
 const RightItem = styled.div`
-  display: flex;
-  flex-direction: column;
+  grid-column: 3 / 4;
 `;
 
 const TagWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 1.4rem 0 0 -0.2rem;
+  margin: 1rem 0 0 -0.2rem;
   width: calc(100% + 0.4rem);
 `;
 

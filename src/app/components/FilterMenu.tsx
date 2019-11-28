@@ -37,10 +37,10 @@ const CustomModal = styled(Modal)`
 const Wrapper = styled.ul`
   margin: 0;
   padding: 0 0 5rem;
-  height: 30vh;
-  border: #fff5 3px solid;
+  height: 40vh;
+  border: #aaa5 3px solid;
   background-color: #fff5;
-  border-radius: 2rem;
+  border-radius: 1.5rem;
   overflow: auto;
 `;
 
@@ -49,14 +49,14 @@ const ListItem = styled.li<{ bgColor: string }>`
   align-items: center;
   justify-content: space-between;
   height: 5rem;
-  background-color: ${({ bgColor }) => `${bgColor}c`};
+  background-color: ${({ bgColor }) => `${bgColor}d`};
   color: #fff;
   list-style: none;
   font-size: 1.8rem;
   position: relative;
   padding: 0 0.6rem;
   margin-bottom: 2px;
-  border-radius: 6px;
+  border-radius: 4px;
   &:last-child {
     margin-bottom: 0;
   }

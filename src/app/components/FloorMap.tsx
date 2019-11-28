@@ -4,6 +4,7 @@ import ImageBox from './ImageBox';
 import { px, vw } from '../utils/units';
 import useResize from '../utils/useResize';
 import floorMapImage from '../assets/floor-map.svg';
+import bgImg from '../assets/background.jpg';
 import RoomMap from '../utils/supportedRoomMap';
 import Modal from './Modal';
 
@@ -20,8 +21,8 @@ const FloorMapComponent = ({ room }: FloorMapProps) => {
         if (!item) return null;
         const { rect, point } = item;
         return (
-          <Wrapper ref={setContainer}>
-            <CustomImageBox container={container} rect={rect} src={floorMapImage} point={point} />
+          <Wrapper ref={setContainer} container={container}>
+            <CustomImageBox rect={rect} src={floorMapImage} point={point} />
           </Wrapper>
         );
       }, [container, room, useResize()])}
@@ -29,29 +30,36 @@ const FloorMapComponent = ({ room }: FloorMapProps) => {
   );
 };
 
-const Wrapper = styled.div`
-  background-color: #888e;
-  border-radius: 10px;
-  padding: 10px;
-`;
-
-interface CustomImageBoxProps {
+interface WrapperProps {
   container: HTMLElement | null;
 }
-
-const CustomImageBox = styled(ImageBox)<CustomImageBoxProps>`
-  width: 100%;
-  height: ${({ container }) => (container ? px(container.clientWidth) : vw(90))};
-  border: #aaa 6px solid;
+const Wrapper = styled.div<WrapperProps>`
+  border: #f80 3px solid;
+  background-image: url(${bgImg});
+  background-attachment: fixed;
+  background-size: contain;
   border-radius: 10px;
   overflow: hidden;
+  width: calc(100% - 3.2rem);
+  height: ${({ container }) => (container ? px(container.clientWidth) : vw(90))};
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 1.6rem;
+`;
+
+const CustomImageBox = styled(ImageBox)`
+  width: 100%;
+  height: 100%;
+  background-color: #fff3;
 `;
 
 const CustomModal = styled(Modal)`
-  top: 20px;
-  bottom: 100px;
-  left: 16px;
-  right: 16px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #777e;
 `;
 
 export default FloorMapComponent;

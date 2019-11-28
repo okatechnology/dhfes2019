@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import EventListItem from './EventListItem';
 import EventDataList from '../data/eventData';
-import bgImg from '../assets/background.jpg';
 import FloorMap from '../containers/FloorMap';
 import useGlobalState from '../globalState';
+import logo from '../assets/dhfes-logo.png';
 
 const EventList = () => {
   const { shownTagMap } = useGlobalState();
@@ -17,36 +17,39 @@ const EventList = () => {
 
   return (
     <>
+      <FirstView>
+        <CustomImage src={logo} />
+      </FirstView>
       <Wrapper>
-        <BgLayer />
-        <div>
-          {useMemo(() => {
-            return EventDataList.map((item) => {
-              if (shownTagStr && !item.tag.some((key) => shownTagMap[key])) return null;
-              return <EventListItem {...item} key={`${item.name}-${shownTagStr}`} />;
-            });
-          }, [shownTagMap])}
-        </div>
+        {useMemo(() => {
+          return EventDataList.map((item) => {
+            if (shownTagStr && !item.tag.some((key) => shownTagMap[key])) return null;
+            return <EventListItem {...item} key={`${item.name}-${shownTagStr}`} />;
+          });
+        }, [shownTagMap])}
       </Wrapper>
       <FloorMap />
     </>
   );
 };
 
-const Wrapper = styled.div`
-  padding: 0.8rem 0 5rem;
+const FirstView = styled.div`
+  height: 100vh;
+  width: 100%;
+  position: relative;
+`;
+const CustomImage = styled.img`
+  display: block;
+  width: 90%;
+  position: sticky;
+  top: 75%;
+  left: 0;
+  right: 0;
+  margin: auto;
 `;
 
-const BgLayer = styled.div`
-  background-position: center;
-  background-size: cover;
-  background-image: url(${bgImg});
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  position: fixed;
-  z-index: -100;
+const Wrapper = styled.div`
+  padding: 0.8rem 0.8rem 5rem;
 `;
 
 export default EventList;
