@@ -33,6 +33,11 @@ const RoomMap = createRoomMap({
   W08: { name: 'W08', rect: { bottom: 0, left: 0, right: 0, top: 0 }, point: { left: 0, top: 0 } },
   cafeteria: { name: 'カフェテリア', rect: { bottom: 0, left: 0, right: 0, top: 0 }, point: { left: 0, top: 0 } },
   hall: { name: '駿河台ホール', rect: { bottom: 0, left: 0, right: 0, top: 0 }, point: { left: 0, top: 0 } },
+  careerCenter: {
+    name: 'キャリア\nセンター',
+    rect: { bottom: 0, left: 0, right: 0, top: 0 },
+    point: { left: 0, top: 0 },
+  },
 });
 
 export default RoomMap;

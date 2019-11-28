@@ -10,12 +10,33 @@ const createTagMap = <T extends Record<string, [string, string]>>(input: T) => {
   }, {}) as Record<keyof T, TagItem>;
 };
 
+const red = '#f00';
+const blue = '#10c';
+const orange = '#f80';
+const green = '#1b2';
+const brown = '#940';
+
 const TagMap = createTagMap({
-  ramen: ['らーめん', '#a2A'],
-  whatasoda: ['神', '#a0B'],
-  test: ['テスト', '#134'],
-  okatechnology: ['たいやき', '#800'],
-  waowao: ['waowao', '#150'],
+  movie: ['映像', orange],
+  threeDCG: ['3DCG', orange],
+  vr: ['VR', orange],
+  animation: ['アニメ', orange],
+  game: ['ゲーム', orange],
+  music: ['音楽', orange],
+  dance: ['ダンス', orange],
+  design: ['デザイン', orange],
+  idol: ['アイドル', orange],
+  display: ['展示', green],
+  experience: ['体験', green],
+  sale: ['販売', green],
+  event: ['イベント', green],
+  live: ['ライブ', green],
+  eat: ['飲食', green],
+  classroom: ['教室', brown],
+  hall: ['駿河台ホール', brown],
+  cafeteria: ['カフェテリア', brown],
+  day1: ['1日目', blue],
+  day2: ['2日目', red],
 });
 
 export const AllTagKeyList = Object.keys(TagMap) as OneOfTagKey[];
