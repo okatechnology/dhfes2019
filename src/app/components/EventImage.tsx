@@ -14,6 +14,7 @@ const CustomImg = styled.img<StyleProps>`
   width: 10rem;
   height: 10rem;
   border-radius: 0.8rem;
+  background-color: #fff;
 `;
 
 export default EventImage;
