@@ -42,7 +42,7 @@ const Wrapper = styled.div<WrapperProps>`
   height: ${({ container }) => (container ? px(container.clientWidth) : vw(90))};
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 15vw;
   margin: auto 1.6rem;
 `;
 

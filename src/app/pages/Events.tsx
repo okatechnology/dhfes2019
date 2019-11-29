@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import EventsComponent from '../templates/Events';
 import { FloorMapProvider } from '../containers/FloorMap';
 
-const Events: PageComponent = () => (
+const Events: FC = () => (
   <FloorMapProvider>
     <EventsComponent />
   </FloorMapProvider>

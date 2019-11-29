@@ -18,5 +18,6 @@ module.exports = merge(common, {
     port: PORT,
     hot: true,
     historyApiFallback: true,
+    // https: true,
   },
 });

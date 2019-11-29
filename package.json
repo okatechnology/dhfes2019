@@ -46,7 +46,10 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpack-pwa-manifest": "^4.1.1",
+    "workbox-sw": "^4.3.1",
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
     "build:app": "webpack --mode production --config scripts/webpack/app/config.prod.js",
