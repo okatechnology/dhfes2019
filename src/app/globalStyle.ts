@@ -1,5 +1,14 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import bg from './assets/background.jpg';
+
+export const BackgroundStyle = css`
+  background-image: url(${bg});
+  background-color: #0b011e;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
+  background-size: 100%;
+`;
 
 const GlobalStyle = createGlobalStyle`
   /* https://github.com/csstools/sanitize.css */
@@ -29,10 +38,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     min-height: 100vh;
-    background-image: url(${bg});
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    ${BackgroundStyle}
     color: #bbb;
   }
   h1 {

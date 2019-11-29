@@ -4,9 +4,9 @@ import ImageBox from './ImageBox';
 import { px, vw } from '../utils/units';
 import useResize from '../utils/useResize';
 import floorMapImage from '../assets/floor-map.svg';
-import bgImg from '../assets/background.jpg';
 import RoomMap from '../utils/supportedRoomMap';
 import Modal from './Modal';
+import { BackgroundStyle } from '../globalStyle';
 
 interface FloorMapProps {
   room: OneOfRoomKey | null;
@@ -34,10 +34,8 @@ interface WrapperProps {
   container: HTMLElement | null;
 }
 const Wrapper = styled.div<WrapperProps>`
-  border: #f80 3px solid;
-  background-image: url(${bgImg});
-  background-attachment: fixed;
-  background-size: contain;
+  border: #050691 3px solid;
+  ${BackgroundStyle}
   border-radius: 10px;
   overflow: hidden;
   width: calc(100% - 3.2rem);
@@ -59,7 +57,7 @@ const CustomModal = styled(Modal)`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #777e;
+  background-color: #aaae;
 `;
 
 export default FloorMapComponent;

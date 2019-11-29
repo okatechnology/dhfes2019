@@ -3,6 +3,7 @@ import { useFloorMapDispatcher, useFloorMapEntry } from '../containers/FloorMap'
 import FixedButton from '../components/FixedButton';
 import EventList from '../components/EventList';
 import FilterMenu from '../components/FilterMenu';
+import FirstView from '../components/FirstView';
 
 const EventsComponent = () => {
   const dispatchFloorMap = useFloorMapDispatcher();
@@ -20,6 +21,7 @@ const EventsComponent = () => {
 
   return (
     <>
+      <FirstView />
       <EventList />
       <FilterMenu open={!room && openFilter} />
       <FixedButton to={handler} type={room ? 'done' : openFilter ? 'done' : 'search'} />
