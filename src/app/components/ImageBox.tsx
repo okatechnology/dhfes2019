@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { px } from '../utils/units';
 import source from '../assets/pointer.png';
 
-const WIDTH = 100;
+const WIDTH = 1000;
 
 interface ImageBoxProps {
   className?: string;
@@ -40,7 +40,7 @@ const TransformState = (
   { left, right, bottom, top }: MapRect,
   point: MapPoint | undefined,
 ) => {
-  const containerWidth = container?.clientWidth ?? 100;
+  const containerWidth = container?.clientWidth ?? 1000;
   const aspect = 4500 / 7762;
   const coef = 100 / (100 - (left + right));
   const HEIGHT = WIDTH * aspect;
@@ -79,8 +79,8 @@ const Box = styled.div<BoxProps>`
   position: absolute;
   width: ${px(WIDTH)};
   margin: auto;
-  left: 0;
-  right: 0;
+  left: ${px(-WIDTH / 2)};
+  right: ${px(-WIDTH / 2)};
   top: 0;
   bottom: 0;
   transform: ${({ transformState: { scale } }) => `scale(${scale})`};
