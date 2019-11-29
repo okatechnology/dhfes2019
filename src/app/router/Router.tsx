@@ -4,9 +4,7 @@ import pages from './routes';
 
 const Router = () => (
   <Switch>
-    <Route exact path={'/'} component={pages.Home} />
-    <Route exact path={'/event/'} component={pages.Events} />
-    <Route exact path={'/event/:id/'} component={pages.Event} />
+    <Route exact path={'/'} component={pages.Events} />
   </Switch>
 );
 
