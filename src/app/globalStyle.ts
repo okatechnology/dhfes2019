@@ -2,12 +2,21 @@ import { createGlobalStyle, css } from 'styled-components';
 import bg from './assets/background.jpg';
 
 export const BackgroundStyle = css`
-  background-image: url(${bg});
-  background-color: #0b011e;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: top;
-  background-size: 100%;
+  &::after {
+    content: '';
+    display: block;
+    position: fixed;
+    background-image: url(${bg});
+    background-repeat: no-repeat;
+    background-color: #0b011e;
+    background-position: top;
+    background-size: 100vw;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -50;
+  }
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -15,7 +24,10 @@ const GlobalStyle = createGlobalStyle`
   *,
   ::before,
   ::after {
+    z-index: 0;
     box-sizing: border-box;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
   }
   ::before,
   ::after {
