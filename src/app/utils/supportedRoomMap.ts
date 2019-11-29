@@ -24,7 +24,7 @@ const RoomMap = createRoomMap({
   E17: { name: 'E17', rect: { bottom: 0, left: 30, right: 0, top: 10 }, point: { left: 93, top: 60 } },
   W01: { name: 'W01', rect: { bottom: 0, left: 0, right: 30, top: -20 }, point: { left: 7, top: 22 } },
   W02: { name: 'W02', rect: { bottom: 0, left: 0, right: 30, top: -15 }, point: { left: 7, top: 32 } },
-  W03: { name: 'W03', rect: { bottom: 0, left: 0, right: 30, top: 0 }, point: { left: 7, top: 42 } },
+  W03: { name: 'W03', rect: { bottom: 0, left: 0, right: 30, top: 0 }, point: { left: 7, top: 46 } },
   W04: { name: 'W04', rect: { bottom: 0, left: 0, right: 30, top: 10 }, point: { left: 7, top: 60 } },
   W05: { name: 'W05', rect: { bottom: 0, left: 0, right: 30, top: 0 }, point: { left: 0, top: 0 } },
   W06: { name: 'W06', rect: { bottom: 0, left: 0, right: 30, top: 0 }, point: { left: 0, top: 0 } },

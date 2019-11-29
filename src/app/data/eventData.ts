@@ -42,7 +42,7 @@ const EventDataList: EventItem[] = [
       '有志のアニメーション制作のサークルです！立ち上げたばかりなので、今回は学祭初出展となります！よろしくお願いします！',
     tag: ['animation', 'display', 'experience', 'classroom', 'day1', 'day2'],
     image: anyWay,
-    room: 'W04',
+    room: 'W03',
   },
   {
     name: 'タピオカカフェ',
