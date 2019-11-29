@@ -23,12 +23,7 @@ const FORMAT = 'YYYY/MM/DD';
 
 const entries: RedirectEntry[] = [
   {
-    term: ['2019/10/25', '2019/11/05'],
-    url: 'https://dhu.life/dhfes/',
-    status: 302,
-  },
-  {
-    term: ['2019/11/05', '2019/11/28'],
+    term: ['2019/11/05', '2020/12/31'],
     url: 'https://dhfes.com/',
     status: 302,
   },
